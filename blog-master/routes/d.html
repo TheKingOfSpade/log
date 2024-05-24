@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fluffy Boy Clicker</title>
+  <link href="StyleClicker.css" rel="stylesheet" type="text/css">
+  <style>
+    .hidden{
+      display:none;
+    }
+  </style>
+</head>
+<body>
+<center>
+  <div class="container">
+
+    <div class="content">
+      <h2 id="lose">Username here:</h2>
+      <div class="scoreplace">
+        <h1 id="score">Feed me magic to make me happy!: 0</h1>
+      </div>
+      <div class="text">
+
+      </div>
+      <input type="text" id="NAME" name="NAME" placeholder="Username:">
+      <button id="submit">Submit</button>
+      <div class="row">
+        <div class="avatar">
+          <img id="picture" height="200" width="200" alt="your avatar" src="https://imgs1.goodsmileus.com/image/cache/data/productimages/Nendoroids/Ralsei/02_2303151238441759-1200x1200.jpg">
+        </div>
+      </div>
+      <button id="click">Feed me magic!</button>
+      <div class="row">
+        <fieldset>
+          <legend><h2>Power Ups</h2></legend>
+          <div class="row">
+            <label for="1">Feed one more magic power. (Need 50 Magic Power)</label>
+            <button id="1">Buy</button>
+          </div>
+          <div class="row">
+            <label for="5">Feed five more magic power. (Need 250 Magic Power)</label>
+            <button id="5">Buy</button>
+          </div>
+          <div class="row">
+            <label for="10">Feed ten more magic power. (Need 2000 Magic Power)</label>
+            <button id="10">Buy</button>
+          </div>
+          <div class="row">
+            <label for="25">Feed 25 more magic power. (Need 10,000 Magic Power)</label>
+            <button id="25">Buy</button>
+          </div>
+          <div class="row">
+            <label for="50">Feed 50 more magic power. (Need 42,333 Magic Power)</label>
+            <button id="50">Buy</button>
+          </div>
+          <div class="row">
+            <label for="100">Feed 100 more magic power. (Need 1,000,000 Magic Power)</label>
+            <button id="100">Buy</button>
+          </div>
+          <br>
+          <div class="row">
+            <label for="win">Win the game (you just win the game (1,000,000) )</label>
+            <button id="win">Buy</button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</center>
+<script>
+  const content = document.querySelector('.text');
+
+  const user = document.querySelector('user');
+  const NAME = document.getElementById('NAME');
+  const submit = document.getElementById('submit');
+  const win = document.getElementById('win');
+
+  submit.addEventListener('click', function(e){
+    let displayuser = NAME.value;
+
+    const actualuser = document.createElement('h2');
+    actualuser.innerHTML = `${displayuser}`;
+    content.insertAdjacentElement('afterbegin', actualuser);
+
+    const unwantedElement = document.querySelector('#lose');
+    unwantedElement.remove();
+
+    NAME.classList.add("hidden");
+    submit.classList.add("hidden");
+  });
+
+  let score = document.getElementById('score');
+  const scorePlace = document.querySelector('.scoreplace');
+  const click = document.getElementById('click');
+  const picture = document.getElementById('picture');
+
+  score = 0;
+  click.addEventListener('click', function(e){
+    score++;
+    scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+
+    if(score >= 50000){
+      picture.src = "https://media.tenor.com/QsAfsNNj29UAAAAj/ralsei-deltarune.gif"
+    }
+    else if(score >= 15000){
+      picture.src = "https://images.goodsmile.info/cgm/images/product/20230314/14113/112904/large/b6bbc68623043ac1dd0a0ec261174989.jpg";
+    }
+    else if(sore >= 10000){
+      picture.scrc = "data:image/jpeg;base64,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";
+    }
+    else if(score >= 5000){
+      picture.src = "https://media.tenor.com/IfjglbhIM6AAAAAM/ralsei-deltarune.gif"
+    }
+    else if (score >= 1000){
+      picture.src = "https://media.spelunky.fyi/mods/logo/01FH3Q47P8BR4HAMEK096CQG31/1633286233802758.png"
+    }
+    else if(score >= 500){
+      picture.src = "https://cdn.shopify.com/s/files/1/0014/1962/products/product_DR_butler_ralsei_costume_main.png?v=1650651751";
+    }
+    else if (score >= 100){
+      picture.src = "https://images.goodsmile.info/cgm/images/product/20230314/14113/112904/large/b6bbc68623043ac1dd0a0ec261174989.jpg"
+    }
+
+    else if (score >= 100000){
+      //(Insert remove everything here)
+    }
+  });
+
+  const times2 = document.getElementById('1');
+
+  let i = 1;
+
+  times2.addEventListener('click', function(e){
+    if(score >= 50){
+      score -= 50;
+      click.addEventListener('click', function(e){
+        score += i;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  const times5 = document.getElementById('5');
+
+  let q = 5;
+
+  times5.addEventListener('click', function(e){
+    if(score >= 250){
+      score -= 250;
+      click.addEventListener('click', function(e){
+        score += q;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  const times10 = document.getElementById('10');
+
+  let w = 10;
+
+  times10.addEventListener('click', function(e){
+    if(score >= 2000){
+      score -= 2000;
+      click.addEventListener('click', function(e){
+        score += w;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  let t = 25;
+
+  times10.addEventListener('click', function(e){
+    if(score >= 10000){
+      score -= 10000;
+      click.addEventListener('click', function(e){
+        score += t;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  let y = 50;
+
+  times10.addEventListener('click', function(e){
+    if(score >= 42333){
+      score -= 42333;
+      click.addEventListener('click', function(e){
+        score += y;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  let u = 100;
+
+  times10.addEventListener('click', function(e){
+    if(score >= 1000000){
+      score -= 1000000;
+      click.addEventListener('click', function(e){
+        score += u;
+        scorePlace.innerHTML = `<h1 id="score">Magic Power fed to Ralsei: ${score}</h1>`;
+      });
+    }
+  });
+
+  win.addEventListener('click', function(e){
+    if(score >= 1000000){
+      score -= 1000000;
+      const winner = document.createElement('h1');
+      winner.innerHTML = `YOU WIN🏆`;
+      content.insertAdjacentElement('afterend', winner);
+    }
+  });
+
+</script>
+</body>
+</html>
